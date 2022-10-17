@@ -13,10 +13,10 @@ class UI {
             <a href="${user.html_url}" target="_blank" class="btn btn-info btn-block mb-4">View Profile</a>
           </div>
           <div class="col-md-9">
-            <span class="badge badge-danger">Public Repos: ${user.public_repos}</span>
-            <span class="badge badge-success">Public Gists: ${user.public_gists}</span>
-            <span class="badge badge-warning">Followers: ${user.followers}</span>
-            <span class="badge badge-info">Following: ${user.following}</span>
+              <span class="badge badge-info">Public Repos: ${user.public_repos}</span>
+              <span class="badge badge-warning">Public Gists: ${user.public_gists}</span>
+              <span class="badge badge-success">Followers: ${user.followers}</span>
+              <span class="badge badge-danger">Following: ${user.following}</span>
             <br><br>
             <ul class="list-group">
               ${user.company ? `<li class="list-group-item">Company: ${user.company}</li>` : ''}
@@ -30,6 +30,31 @@ class UI {
       <h3 class="page-heading mb-3">Latest Repos</h3>
       <div id="repos"></div>
     `;
+  }
+
+  // Show user repos
+  showRepos(repos) {
+    let output = '';
+
+    repos.forEach(function(repo) {
+      output += `
+        <div class="card card-body mb-2">
+          <div class="row">
+            <div class="col-md-6">
+              <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+            </div>
+            <div class="col-md-6">
+              <span class="badge badge-info">Stars: ${repo.stargazers_count}</span>
+              <span class="badge badge-warning">Watchers: ${repo.watchers_count}</span>
+              <span class="badge badge-success">Forks: ${repo.forks_count}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    // Output repos
+    document.getElementById('repos').innerHTML = output;
   }
 
   // Show alert message
